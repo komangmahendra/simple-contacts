@@ -20,7 +20,11 @@ const ContactItem = (props: ContactItemProps) => {
   }, [contact]);
 
   return (
-    <Container onClick={() => handleSelectContact(contact)} isActive={isActive}>
+    <Container
+      onClick={() => handleSelectContact(contact)}
+      isActive={isActive}
+      data-testid="contact-item"
+    >
       {renderImage}
       <Name> {`${contact.firstName} ${contact.lastName}`}</Name>
     </Container>
