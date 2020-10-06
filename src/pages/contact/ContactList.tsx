@@ -38,7 +38,7 @@ const ContactList = (props: ContactListProps) => {
 
       <TitleHeader>
         <span>CONTACTS</span>
-        <img src={AddIcon} onClick={() => setMode("add")} />
+        <img src={AddIcon} onClick={() => setMode("add")} alt="Add" />
       </TitleHeader>
 
       <div className="container-contact-list">{renderListContacts}</div>
