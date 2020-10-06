@@ -50,7 +50,7 @@ const ContactDetail = (props: ContactDetailProps) => {
       const initial = createInitial(contact?.firstName, contact?.lastName);
       return <div className="image-dummy">{initial}</div>;
     } else {
-      return <img src={photo} className="image-profile"></img>;
+      return <img src={photo} className="image-profile" alt="Profile"></img>;
     }
   }, [contact, photo]);
 
@@ -111,7 +111,7 @@ const ContactDetail = (props: ContactDetailProps) => {
               <div className="image-container">
                 {renderImage}
 
-                {!photo ? null : (
+                {photo && mode === "edit" ? (
                   <div className="image-action-button">
                     <img
                       src={DeleteIcon}
@@ -120,7 +120,7 @@ const ContactDetail = (props: ContactDetailProps) => {
                       onClick={() => setPhoto("")}
                     />
                   </div>
-                )}
+                ) : null}
               </div>
             ) : null}
             <div className="detail">

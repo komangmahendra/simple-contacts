@@ -52,6 +52,7 @@ const Container = styled.div`
   .container-contact-list {
     margin-top: 10px;
     overflow-y: scroll;
+    max-height: 370px;
 
     ::-webkit-scrollbar {
       width: 3px;
