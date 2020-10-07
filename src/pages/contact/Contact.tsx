@@ -24,13 +24,12 @@ const ContactComponent = () => {
     (state) => state.contact.contactDetail
   );
 
+  const isLoading = useSelector<RootState, boolean>(
+    (state) => state.contact.isLoading
+  );
   const isLoadingDetail = useSelector<RootState, boolean>(
     (state) => state.contact.isLoadingDetail
   );
-
-  const fetchContactsAsync = () => {
-    dispatch(actions.fetchContacts.request());
-  };
 
   const handleSelectContact = (contact: Contact | null) => {
     setMode(null);
@@ -67,6 +66,10 @@ const ContactComponent = () => {
     return arrFiltered;
   }, [filter, contacts]);
 
+  const fetchContactsAsync = () => {
+    dispatch(actions.fetchContacts.request());
+  };
+
   useEffect(() => {
     fetchContactsAsync();
   }, []);
@@ -77,6 +80,7 @@ const ContactComponent = () => {
       contact={contact}
       mode={mode}
       filter={filter}
+      isLoading={isLoading}
       isLoadingDetail={isLoadingDetail}
       setMode={setMode}
       handleSave={handleSave}

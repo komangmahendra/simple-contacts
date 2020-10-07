@@ -16,6 +16,7 @@ const ContactList = (props: ContactListProps) => {
     contacts,
     contact,
     filter,
+    isLoading,
     handleSelectContact,
     setMode,
     setFilter,
@@ -46,7 +47,13 @@ const ContactList = (props: ContactListProps) => {
         />
       </TitleHeader>
 
-      <div className="container-contact-list">{renderListContacts}</div>
+      <div className="container-contact-list">
+        {!isLoading ? (
+          renderListContacts
+        ) : (
+          <div className="loading-container">Loading...</div>
+        )}
+      </div>
     </Container>
   );
 };
@@ -58,6 +65,19 @@ const Container = styled.div`
     margin-top: 10px;
     overflow-y: scroll;
     max-height: 370px;
+
+    > .loading-container {
+      width: 100%;
+      height: 300px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: #fff;
+      font-weight: 600;
+      font-size: 18px;
+    }
 
     ::-webkit-scrollbar {
       width: 3px;

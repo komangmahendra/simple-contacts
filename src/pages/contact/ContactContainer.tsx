@@ -14,6 +14,7 @@ const ContactContainer = (props: ContactContainerProps) => {
     contact,
     mode,
     filter,
+    isLoading,
     isLoadingDetail,
     handleSave,
     handleSelectContact,
@@ -28,6 +29,7 @@ const ContactContainer = (props: ContactContainerProps) => {
         contacts={contacts}
         contact={contact}
         filter={filter}
+        isLoading={isLoading}
         setMode={setMode}
         handleSelectContact={handleSelectContact}
         setFilter={setFilter}

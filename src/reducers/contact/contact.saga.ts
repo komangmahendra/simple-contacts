@@ -116,14 +116,13 @@ function* deleteContact(action: any) {
 
     const { id } = action.payload;
 
-    console.log(id);
-
     const request = () => fetch(`${BASE_URL}/${id}`, options);
     const response = yield call(request);
     const responseData = yield response.json();
 
     if (response && response.ok) {
       yield put(actions.deleteContact.success());
+      yield put(actions.setContact(null));
       yield call(fetchContacts);
     } else {
       yield put(actions.deleteContact.failure({ error: responseData.message }));
