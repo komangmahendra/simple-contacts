@@ -217,7 +217,7 @@ const Header = styled.div`
   background: #292c31;
   padding: 20px;
 
-  > img {
+  img {
     cursor: pointer;
   }
 
