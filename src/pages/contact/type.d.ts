@@ -15,6 +15,7 @@ export type ContactContainerProps = {
   contact: Contact;
   mode: Mode;
   filter: string;
+  isLoadingDetail: boolean;
   setMode: (m: Mode) => void;
   handleSave: (data: Contact, mode: Mode, id?: string) => void;
   handleSelectContact: (c: Contact | null) => void;
@@ -51,4 +52,5 @@ export type ContactDetailProps = Pick<
   | "setMode"
   | "handleSave"
   | "handleDeleteContact"
+  | "isLoadingDetail"
 >;

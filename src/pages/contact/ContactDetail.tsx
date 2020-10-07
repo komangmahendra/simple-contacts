@@ -20,6 +20,7 @@ const ContactDetail = (props: ContactDetailProps) => {
   const {
     contact,
     mode,
+    isLoadingDetail,
     setMode,
     handleSelectContact,
     handleSave,
@@ -69,6 +70,17 @@ const ContactDetail = (props: ContactDetailProps) => {
       setPhoto("");
     }
   }, [mode, contact]);
+
+  if (isLoadingDetail) {
+    return (
+      <InfoBox>
+        <span className="title">Loading...</span>
+        <span className="subtitle">
+          Please wait, we processing your request
+        </span>
+      </InfoBox>
+    );
+  }
 
   return (
     <Container>
@@ -182,6 +194,7 @@ const ContactDetail = (props: ContactDetailProps) => {
 };
 
 const InfoBox = styled.div`
+  background: #1f2124;
   display: flex;
   flex-direction: column;
   justify-content: center;

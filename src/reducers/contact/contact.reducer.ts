@@ -60,6 +60,21 @@ export const contactReducer = createReducer<ContactState, ContactActions>(
     isLoadingDetail: false,
     error: null,
   }))
+  .handleAction(actions.createContact.request, (state) => ({
+    ...state,
+    isLoadingDetail: true,
+    error: null,
+  }))
+  .handleAction(actions.createContact.success, (state) => ({
+    ...state,
+    isLoadingDetail: false,
+    error: null,
+  }))
+  .handleAction(actions.createContact.failure, (state) => ({
+    ...state,
+    isLoadingDetail: false,
+    error: null,
+  }))
   .handleAction(actions.updateContact.request, (state) => ({
     ...state,
     isLoadingDetail: true,

@@ -24,6 +24,10 @@ const ContactComponent = () => {
     (state) => state.contact.contactDetail
   );
 
+  const isLoadingDetail = useSelector<RootState, boolean>(
+    (state) => state.contact.isLoadingDetail
+  );
+
   const fetchContactsAsync = () => {
     dispatch(actions.fetchContacts.request());
   };
@@ -73,6 +77,7 @@ const ContactComponent = () => {
       contact={contact}
       mode={mode}
       filter={filter}
+      isLoadingDetail={isLoadingDetail}
       setMode={setMode}
       handleSave={handleSave}
       handleSelectContact={handleSelectContact}
