@@ -15,7 +15,14 @@ const ContactItem = (props: ContactItemProps) => {
       const initial = createInitial(contact.firstName, contact.lastName);
       return <DummyImage>{initial}</DummyImage>;
     } else {
-      return <img src={contact.photo} className="contact-photo" />;
+      return (
+        <img
+          src={contact.photo}
+          className="contact-photo"
+          alt="Profile"
+          data-testid="profile-item"
+        />
+      );
     }
   }, [contact]);
 

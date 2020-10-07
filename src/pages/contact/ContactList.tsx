@@ -33,12 +33,17 @@ const ContactList = (props: ContactListProps) => {
   }, [contacts, contact]);
 
   return (
-    <Container>
+    <Container data-testid="contact-list">
       <ContactHeaderFilter filter={filter} setFilter={setFilter} />
 
       <TitleHeader>
         <span>CONTACTS</span>
-        <img src={AddIcon} onClick={() => setMode("add")} alt="Add" />
+        <img
+          src={AddIcon}
+          onClick={() => setMode("add")}
+          alt="Add"
+          data-testid="add-button"
+        />
       </TitleHeader>
 
       <div className="container-contact-list">{renderListContacts}</div>

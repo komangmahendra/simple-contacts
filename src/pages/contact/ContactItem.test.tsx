@@ -1,11 +1,11 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 
 // component
 import ContactItem from "./ContactItem";
 
 const mockHandleSelectContact = jest.fn();
-const mockComtact = {
+const mockContact = {
   id: "12345",
   firstName: "Test",
   lastName: "Last",
@@ -19,7 +19,7 @@ describe("Contact Item test", () => {
       <ContactItem
         isActive={false}
         handleSelectContact={mockHandleSelectContact}
-        contact={mockComtact}
+        contact={mockContact}
       />
     );
 
@@ -31,10 +31,54 @@ describe("Contact Item test", () => {
       <ContactItem
         isActive={false}
         handleSelectContact={mockHandleSelectContact}
-        contact={mockComtact}
+        contact={mockContact}
       />
     );
 
     expect(getByText("Test Last")).toBeTruthy();
+  });
+
+  test("click the card will trigger the function", () => {
+    const { getByTestId } = render(
+      <ContactItem
+        isActive={false}
+        handleSelectContact={mockHandleSelectContact}
+        contact={mockContact}
+      />
+    );
+
+    const card = getByTestId("contact-item");
+    expect(card).toBeTruthy();
+
+    fireEvent.click(card);
+    expect(mockHandleSelectContact).toBeCalledWith(mockContact);
+  });
+
+  test("render initial if not has link photo", () => {
+    const { getByText } = render(
+      <ContactItem
+        isActive={false}
+        handleSelectContact={mockHandleSelectContact}
+        contact={mockContact}
+      />
+    );
+
+    const profilePhoto = getByText("TL");
+    expect(profilePhoto).toBeTruthy();
+  });
+
+  test("render the photo if has image link", () => {
+    mockContact.photo = "http://photo.com";
+
+    const { getByTestId } = render(
+      <ContactItem
+        isActive={false}
+        handleSelectContact={mockHandleSelectContact}
+        contact={mockContact}
+      />
+    );
+
+    const profilePhoto = getByTestId("profile-item");
+    expect(profilePhoto).toBeTruthy();
   });
 });
