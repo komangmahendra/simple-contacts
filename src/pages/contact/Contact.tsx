@@ -53,7 +53,7 @@ const ContactComponent = () => {
       return contacts;
     } else {
       contacts.forEach((c) => {
-        var regex = new RegExp(filter, "g");
+        var regex = new RegExp(filter, "gi");
         if (`${c.firstName} ${c.lastName}`.match(regex)) {
           arrFiltered.push(c);
         }
