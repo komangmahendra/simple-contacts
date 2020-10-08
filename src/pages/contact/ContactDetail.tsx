@@ -110,12 +110,26 @@ const ContactDetail = (props: ContactDetailProps) => {
     }
   };
 
+  const handleImageError = (ev: any) => {
+    const fallbackImage =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQlomRxuD2hXxPAPem4LggnMmje2M5z_ZNvRg&usqp=CAU";
+
+    ev.target.src = fallbackImage;
+  };
+
   const renderImage = useMemo(() => {
     if (!contact?.photo || contact?.photo === "N/A") {
       const initial = createInitial(contact?.firstName, contact?.lastName);
       return <div className="image-dummy">{initial}</div>;
     } else {
-      return <img src={photo} className="image-profile" alt="Profile"></img>;
+      return (
+        <img
+          src={photo}
+          className="image-profile"
+          alt="Profile"
+          onError={handleImageError}
+        ></img>
+      );
     }
   }, [contact, photo]);
 

@@ -12,7 +12,7 @@ const ContactItem = (props: ContactItemProps) => {
 
   const handleImageError = (ev: any) => {
     const fallbackImage =
-      "https://c-sf.smule.com/rs-z5/account/picture/a5/c7/85553e78-939c-4103-8759-686cf4c5ca40_1024.jpg";
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQlomRxuD2hXxPAPem4LggnMmje2M5z_ZNvRg&usqp=CAU";
 
     ev.target.src = fallbackImage;
   };
