@@ -35,7 +35,6 @@ const ContactDetail = (props: ContactDetailProps) => {
     firstName: true,
     lastName: true,
     age: true,
-    photo: true,
   });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -51,7 +50,6 @@ const ContactDetail = (props: ContactDetailProps) => {
       firstName: true,
       lastName: true,
       age: true,
-      photo: true,
     };
 
     if (!firstName) {
@@ -66,11 +64,6 @@ const ContactDetail = (props: ContactDetailProps) => {
 
     if (!age) {
       tempValidation.age = false;
-      isPass = false;
-    }
-
-    if (!photo) {
-      tempValidation.photo = false;
       isPass = false;
     }
 
@@ -89,7 +82,6 @@ const ContactDetail = (props: ContactDetailProps) => {
       firstName: true,
       lastName: true,
       age: true,
-      photo: true,
     });
   };
 
@@ -266,7 +258,6 @@ const ContactDetail = (props: ContactDetailProps) => {
                   <InputText
                     onChange={(text) => setPhoto(text)}
                     value={photo}
-                    isError={!validation.photo}
                   />
                 )}
               </div>
