@@ -55,6 +55,12 @@ function* fetchContactDetail(action: any) {
 
 function* createContact(action: any) {
   try {
+    const data = action.payload;
+
+    if (!data.photo) {
+      data.photo = "N/A";
+    }
+
     const options = {
       method: "POST",
       headers: {
@@ -81,6 +87,10 @@ function* createContact(action: any) {
 function* updateContact(action: any) {
   try {
     const { id, data } = action.payload;
+
+    if (!data.photo) {
+      data.photo = "N/A";
+    }
 
     const options = {
       method: "PUT",
