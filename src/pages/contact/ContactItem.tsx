@@ -10,6 +10,13 @@ import { ContactItemProps } from "./type";
 const ContactItem = (props: ContactItemProps) => {
   const { contact, isActive, handleSelectContact } = props;
 
+  const handleImageError = (ev: any) => {
+    const fallbackImage =
+      "https://c-sf.smule.com/rs-z5/account/picture/a5/c7/85553e78-939c-4103-8759-686cf4c5ca40_1024.jpg";
+
+    ev.target.src = fallbackImage;
+  };
+
   const renderImage = useMemo(() => {
     if (!contact.photo || contact.photo === "N/A") {
       const initial = createInitial(contact.firstName, contact.lastName);
@@ -21,6 +28,7 @@ const ContactItem = (props: ContactItemProps) => {
           className="contact-photo"
           alt="Profile"
           data-testid="profile-item"
+          onError={handleImageError}
         />
       );
     }
