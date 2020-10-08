@@ -5,12 +5,13 @@ export type InputTextProps = {
   onChange: (text: string) => void;
   value?: string | undefined | number | null;
   placeholder?: string;
+  isError?: boolean;
 };
 
 const InputTextComponent = (props: InputTextProps) => {
-  const { value, placeholder, onChange } = props;
+  const { value, placeholder, isError, onChange } = props;
   return (
-    <InputText>
+    <InputText hasError={isError!}>
       <input
         onChange={(v) => onChange(v.target.value)}
         value={value!}
@@ -21,7 +22,7 @@ const InputTextComponent = (props: InputTextProps) => {
   );
 };
 
-const InputText = styled.div`
+const InputText = styled.div<{ hasError: boolean }>`
   display: flex;
   width: 100%;
   height: 20px;
@@ -29,6 +30,8 @@ const InputText = styled.div`
   padding: 5px;
   background-color: #2c2f33;
   align-items: center;
+  border: 1px solid transparent;
+  border-color: ${({ hasError }) => (hasError ? "#91110d" : "transparent")};
 
   > .input-text {
     background: transparent;

@@ -22,8 +22,8 @@ const ContactDetail = (props: ContactDetailProps) => {
     mode,
     isLoadingDetail,
     setMode,
-    handleSelectContact,
     handleSave,
+    handleSelectContact,
     handleDeleteContact,
   } = props;
 
@@ -31,12 +31,76 @@ const ContactDetail = (props: ContactDetailProps) => {
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState<number | string | null>(null);
   const [photo, setPhoto] = useState("");
+  const [validation, setValidaton] = useState({
+    firstName: true,
+    lastName: true,
+    age: true,
+    photo: true,
+  });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const closeDetails = () => {
+    resetValidation();
     handleSelectContact(null);
   };
 
+  const checkValidation = () => {
+    let isPass = true;
+
+    const tempValidation = {
+      firstName: true,
+      lastName: true,
+      age: true,
+      photo: true,
+    };
+
+    if (!firstName) {
+      tempValidation.firstName = false;
+      isPass = false;
+    }
+
+    if (!lastName) {
+      tempValidation.lastName = false;
+      isPass = false;
+    }
+
+    if (!age) {
+      tempValidation.age = false;
+      isPass = false;
+    }
+
+    if (!photo) {
+      tempValidation.photo = false;
+      isPass = false;
+    }
+
+    setValidaton(tempValidation);
+
+    if (!isPass) {
+      setErrorMessage("Please input valid data");
+    }
+
+    return isPass;
+  };
+
+  const resetValidation = () => {
+    setErrorMessage("");
+    setValidaton({
+      firstName: true,
+      lastName: true,
+      age: true,
+      photo: true,
+    });
+  };
+
   const onClickSave = () => {
+    resetValidation();
+    const isPass = checkValidation();
+
+    if (!isPass) {
+      return;
+    }
+
     handleSave({ firstName, lastName, age, photo }, mode, contact?.id);
   };
 
@@ -149,6 +213,7 @@ const ContactDetail = (props: ContactDetailProps) => {
                   <InputText
                     onChange={(text) => setFirstName(text)}
                     value={firstName}
+                    isError={!validation.firstName}
                   />
                 )}
               </div>
@@ -161,6 +226,7 @@ const ContactDetail = (props: ContactDetailProps) => {
                   <InputText
                     onChange={(text) => setLastName(text)}
                     value={lastName}
+                    isError={!validation.lastName}
                   />
                 )}
               </div>
@@ -170,7 +236,11 @@ const ContactDetail = (props: ContactDetailProps) => {
                 {!mode ? (
                   <span className="content">{age}</span>
                 ) : (
-                  <InputText onChange={(text) => setAge(text)} value={age} />
+                  <InputText
+                    onChange={(text) => setAge(text)}
+                    value={age}
+                    isError={!validation.age}
+                  />
                 )}
               </div>
 
@@ -182,9 +252,14 @@ const ContactDetail = (props: ContactDetailProps) => {
                   <InputText
                     onChange={(text) => setPhoto(text)}
                     value={photo}
+                    isError={!validation.photo}
                   />
                 )}
               </div>
+
+              {errorMessage ? (
+                <div className="error-message"> {errorMessage}</div>
+              ) : null}
             </div>
           </Body>
         </>
@@ -251,6 +326,13 @@ const Body = styled.div`
 
   height: 100%;
   width: 100%;
+
+  .error-message {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #ff2f29;
+    text-align: center;
+  }
 
   .action-title {
     font-size: 20px;
